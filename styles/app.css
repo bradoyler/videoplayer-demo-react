@@ -14,27 +14,44 @@ a.active {
 #example {
     position: absolute;
 }
-
-.App {
-    width: 1000px;
-    height: 800px;
-}
-
-.Playlist {
-    list-style: none;
+.thumb {
     float: left;
-    width: 200px;
+}
+
+.app {
+    width: 100%;
+    height: 800px;
+    background: black;
+    color: whitesmoke;
+}
+
+.playlist {
+    max-height:600px;
+    max-width: 300px;
     overflow: auto;
-    padding: 10px 40px;
+    left: 0;
+    top: 0;
+    zoom: 1;
+    list-style: none;
+    margin-left: 0;
+    padding-top: 30px;
+    padding-left: 10px;
 }
 
-.Playlist > li {
-    border-bottom: 2px solid #ccc;
-    margin-bottom: 5px;
-    padding:3px;
+.playlist > li {
+    height:70px;
+    margin-bottom: .375em;
 }
 
-.Player {
+.playlist a {
+    color: #fff;
+}
+
+.playlist a.active {
+    color: #E4CB00;
+}
+
+.player {
 
     float: left;
     width: 600px;

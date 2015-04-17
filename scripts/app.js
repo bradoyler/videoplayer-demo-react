@@ -13,22 +13,25 @@ var App = React.createClass({displayName: "App",
     render: function () {
         var links = this.state.videos.map(function (item) {
             return (
-
                 <li key={item.video.mpxId}>
-                    <Link
-                        to="video"
-                        params={{ mpxId: item.video.mpxId }}
-                    >{item.video.title}</Link>
+                    <Link to="video" params={{ mpxId: item.video.mpxId }} >
+                    <span className="item_thumb">
+                        <img className="thumb" src={item.video.thumbnail} width="80" height="60" />
+                    </span>
+                    <span className="item_title">
+                        {item.video.title}
+                    </span>
+                    </Link>
                 </li>
             );
         });
 
         return (
-           <div className="App">
-                <div className="Player">
+           <div className="app">
+                <div className="player">
                     <RouteHandler/>
                 </div>
-                <ul className="Playlist">
+                <ul className="playlist">
                     {links}
                 </ul>
             </div>
