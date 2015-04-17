@@ -39,12 +39,16 @@ var App = React.createClass({displayName: "App",
     }
 });
 
-//var Index = React.createClass({
-//    render: function () {
-//        this.context.router.transitionTo('video/123123')
-//        return;
-//    }
-//});
+var Index = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.func
+    },
+    render: function () {
+        var mpxId = findVideo().video.mpxId;
+        this.context.router.transitionTo('video',{mpxId: mpxId})
+        return;
+    }
+});
 
 var Video = React.createClass({displayName: "Video",
     contextTypes: {
@@ -65,12 +69,13 @@ var Video = React.createClass({displayName: "Video",
 
 var routes = (
     <Route handler={App}>
-        <DefaultRoute handler={Video}/>
+        <DefaultRoute handler={Index}/>
         <Route name="video" path="video/:mpxId" handler={Video}/>
     </Route>
 );
 
-Router.run(routes, function (Handler) {
+var locationTypes = [Router.HashLocation, Router.HistoryLocation, Router.RefreshLocation];
+Router.run(routes, locationTypes[0], function (Handler) {
     React.render(<Handler/>, document.getElementById('pdkplayer'));
 });
 
