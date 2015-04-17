@@ -46,7 +46,7 @@ var Index = React.createClass({
     render: function () {
         var mpxId = findVideo().video.mpxId;
         this.context.router.transitionTo('video',{mpxId: mpxId})
-        return;
+        return (<span></span>);
     }
 });
 
@@ -60,7 +60,7 @@ var Video = React.createClass({displayName: "Video",
         var videoView =  (
             <div className="Video">
                 <h1>{item.video.title}</h1>
-                <iframe src={item.video.embedUrl} width="600" height="480" />
+                <iframe src={item.video.embedUrl} width="580" height="430" />
             </div>
         );
         return videoView;
