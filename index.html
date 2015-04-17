@@ -2,10 +2,22 @@
 <html>
 <head>
     <title>PDK Player - React</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.2.2/octicons.css" />
     <link rel="stylesheet" href="styles/app.css" />
 </head>
 <body>
-<h1 class="breadcrumbs"><a href="">Video Player demo - React</a> </h1>
+<header>
+    <div class="container">
+        <h1 class="pull-left">
+            <a href="">Video Player demo - React</a>
+        </h1>
+        <nav class="pull-right">
+            <a class="btn" href="https://github.com/bradoyler/pdkplayer-react"><span class="hidden-xs"> View on GitHub </span><span class="octicon octicon-mark-github" aria-hidden="true"></span></a>
+        </nav>
+    </div>
+</header>
+
 <div id="pdkplayer"></div>
 <script>
     window.playerApp = {};

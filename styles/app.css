@@ -1,6 +1,3 @@
-body {
-    font-family: "Helvetica Neue", Arial;
-}
 
 .thumb {
     float: left;
@@ -16,7 +13,7 @@ body {
 }
 
 .playlist {
-    max-height:520px;
+    max-height:540px;
     max-width: 320px;
     overflow: auto;
     left: 0;
