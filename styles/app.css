@@ -1,0 +1,44 @@
+body {
+    font-family: "Helvetica Neue", Arial;
+    font-weight: 200;
+}
+
+a {
+    color: hsl(200, 50%, 50%);
+}
+
+a.active {
+    color: hsl(20, 50%, 50%);
+}
+
+#example {
+    position: absolute;
+}
+
+.App {
+    width: 1000px;
+    height: 800px;
+}
+
+.Playlist {
+    list-style: none;
+    float: left;
+    width: 200px;
+    overflow: auto;
+    padding: 10px 40px;
+}
+
+.Playlist > li {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 5px;
+    padding:3px;
+}
+
+.Player {
+
+    float: left;
+    width: 600px;
+    border-left: 1px solid #ccc;
+    overflow: auto;
+    padding: 5px;
+}
