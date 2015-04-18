@@ -5,13 +5,26 @@ var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
-var App = React.createClass({displayName: "App",
+var App = React.createClass({displayName:'App',
+
+    render: function () {
+        return (
+            <div className="playerApp">
+                <RouteHandler />
+                <Playlist />
+            </div>
+        );
+    }
+
+});
+
+var Playlist = React.createClass({displayName: "Playlist",
     getInitialState: function () {
         return { videos: findVideos() };
     },
 
     render: function () {
-        var links = this.state.videos.map(function (item) {
+        var playlistItems = this.state.videos.map(function (item) {
             return (
                 <li key={item.video.mpxId}>
                     <Link to="video" params={{ mpxId: item.video.mpxId }} >
@@ -27,50 +40,50 @@ var App = React.createClass({displayName: "App",
         });
 
         return (
-           <div className="app">
-                <div className="player">
-                    <RouteHandler/>
-                </div>
+           <div className="playlist-container">
                 <ul className="playlist">
-                    {links}
+                    {playlistItems}
                 </ul>
             </div>
         );
     }
 });
 
+
 var Index = React.createClass({
     contextTypes: {
         router: React.PropTypes.func
     },
     render: function () {
+        
         var mpxId = findVideo().video.mpxId;
         this.context.router.transitionTo('video',{mpxId: mpxId})
         return (<span></span>);
     }
 });
 
-var Video = React.createClass({displayName: "Video",
+var Player = React.createClass({displayName: "Player",
     contextTypes: {
         router: React.PropTypes.func
     },
 
     render: function () {
         var item = findVideo(this.context.router.getCurrentParams().mpxId);
-        var videoView =  (
-            <div className="Video">
+        var iframeVideo =  (
+            <div className="player">
                 <h1>{item.video.title}</h1>
                 <iframe src={item.video.embedUrl} width="580" height="430" />
             </div>
         );
-        return videoView;
+
+        return iframeVideo;
     }
 });
 
 var routes = (
     <Route handler={App}>
         <DefaultRoute handler={Index}/>
-        <Route name="video" path="video/:mpxId" handler={Video}/>
+        <Route name="video" path="video/:mpxId" handler={Player}/>
     </Route>
 );
 
