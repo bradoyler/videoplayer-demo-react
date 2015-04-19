@@ -5,37 +5,39 @@ var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
-var App = React.createClass({displayName:'App',
+var App = React.createClass({
 
+    getInitialState: function () {
+        return { videos: getVideos() };
+    },
     render: function () {
         return (
             <div className="playerApp">
                 <RouteHandler />
-                <Playlist />
+                <Playlist items={this.state.videos} />
             </div>
         );
     }
-
 });
 
-var Playlist = React.createClass({displayName: "Playlist",
-    getInitialState: function () {
-        return { videos: findVideos() };
+var Index = React.createClass({
+
+    contextTypes: {
+        router: React.PropTypes.func
     },
+    render: function () {
+        var videoId = firstVideo().video.mpxId;
+        this.context.router.transitionTo('video', {videoId: videoId})
+        return (<span></span>);
+    }
+});
+
+var Playlist = React.createClass({
 
     render: function () {
-        var playlistItems = this.state.videos.map(function (item) {
+        var playlistItems = this.props.items.map(function (item) {
             return (
-                <li key={item.video.mpxId}>
-                    <Link to="video" params={{ mpxId: item.video.mpxId }} >
-                    <span className="item_thumb">
-                        <img className="thumb" src={item.video.thumbnail} width="80" height="60" />
-                    </span>
-                    <span className="item_title">
-                        {item.video.title}
-                    </span>
-                    </Link>
-                </li>
+                <PlaylistItem item={item} />
             );
         });
 
@@ -49,66 +51,74 @@ var Playlist = React.createClass({displayName: "Playlist",
     }
 });
 
+var PlaylistItem = React.createClass({
 
-var Index = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.func
-    },
     render: function () {
-        
-        var mpxId = findVideo().video.mpxId;
-        this.context.router.transitionTo('video',{mpxId: mpxId})
-        return (<span></span>);
+        var video = this.props.item.video;
+        return (
+            <li key={video.mpxId}>
+                <Link to="video" params={{ videoId: video.mpxId }} >
+                    <span className="item_thumb">
+                        <img className="thumb" src={video.thumbnail} width="80" height="60" />
+                    </span>
+                    <span className="item_title">
+                        {video.title}
+                    </span>
+                </Link>
+            </li>
+        );
     }
 });
 
-var Player = React.createClass({displayName: "Player",
+var Player = React.createClass({
+
     contextTypes: {
         router: React.PropTypes.func
     },
-
     render: function () {
-        var item = findVideo(this.context.router.getCurrentParams().mpxId);
-        var iframeVideo =  (
+        var item = findVideo(this.context.router.getCurrentParams().videoId);
+        return (
             <div className="player">
                 <h1>{item.video.title}</h1>
                 <iframe src={item.video.embedUrl} width="580" height="430" />
             </div>
         );
-
-        return iframeVideo;
     }
 });
 
 var routes = (
     <Route handler={App}>
         <DefaultRoute handler={Index}/>
-        <Route name="video" path="video/:mpxId" handler={Player}/>
+        <Route name="video" path="video/:videoId" handler={Player}/>
     </Route>
 );
 
 var locationTypes = [Router.HashLocation, Router.HistoryLocation, Router.RefreshLocation];
+
 Router.run(routes, locationTypes[0], function (Handler) {
     React.render(<Handler/>, document.getElementById('pdkplayer'));
 });
 
 /*****************************************************************************/
-// data stuff
+// Data Model
 
-function findVideo(mpxId) {
-    var videos = findVideos();
+function findVideo(videoId) {
+
+    var videos = getVideos();
+
     for (var i = 0, l = videos.length; i < l; i ++) {
-        if (videos[i].video.mpxId === mpxId) {
+        if (videos[i].video.mpxId === videoId) {
             return videos[i];
         }
     }
-    return videos[0]; // load 1st by default
 }
 
-function findVideos() {
+function firstVideo() {
+    var videos = getVideos();
+    return videos[0];
+}
+
+function getVideos() {
+    //TODO: map results into a Model to allow videos from multiple sources
     return playerApp.playlist.results;
-}
-
-function underscore(str) {
-    return str.toLowerCase().replace(/ /, '_');
 }
