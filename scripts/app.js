@@ -9,7 +9,8 @@ var App = React.createClass({
 
     getDefaultProps() {
         return {
-            mpxVideos: getVideos('mpx'),
+            mpxNBCNews: getVideos('mpxNBCNews'),
+            mpxTODAY: getVideos('mpxTODAY'),
             ytVideos: getVideos('youtube'),
             swVideos: getVideos('stringwire')
         };
@@ -18,7 +19,8 @@ var App = React.createClass({
         return (
             <div className="playerApp">
                 <RouteHandler />
-                <Playlist items={this.props.mpxVideos} />
+                <Playlist items={this.props.mpxNBCNews} />
+                <Playlist items={this.props.mpxTODAY} />
                 <Playlist items={this.props.ytVideos} />
                 <Playlist items={this.props.swVideos} />
             </div>
@@ -134,17 +136,29 @@ function firstVideo(source) {
 
 function getVideos(source) {
 
-    var mpxVideos = playerApp.mpxPlaylist.results.map(function (item) {
+    var playlists ={};
+
+    playlists.mpxNBCNews = playerApp.mpxPlaylist.results.map(function (item) {
         return {
             videoId:item.video.mpxId,
             title:item.video.title,
             thumbnail:item.video.thumbnail,
             embedUrl: item.video.embedUrl,
-            source:'mpx'
+            source:'mpxNBCNews'
         };
     });
 
-    var ytVideos = playerApp.ytPlaylist.videos.map(function (item) {
+    playlists.mpxTODAY = playerApp.mpxPlaylistTODAY.results.map(function (item) {
+        return {
+            videoId:item.video.mpxId,
+            title:item.video.title,
+            thumbnail:item.video.thumbnail,
+            embedUrl: 'http://www.today.com/offsite/e-'+ item.video.mpxId,
+            source:'mpxTODAY'
+        };
+    });
+
+    playlists.youtube = playerApp.ytPlaylist.videos.map(function (item) {
         return {
             videoId:item.videoId,
             title:item.title,
@@ -154,7 +168,7 @@ function getVideos(source) {
         };
     });
 
-    var swVideos = playerApp.swPlaylist.data.map(function (item) {
+    playlists.stringwire = playerApp.swPlaylist.data.map(function (item) {
         return {
             videoId:item.token,
             title:item.title,
@@ -164,18 +178,10 @@ function getVideos(source) {
         };
     });
 
-    var videos = [];
-    if(source==='youtube') {
-        videos = ytVideos;
-    }
-    else if (source==='stringwire') {
-        console.log('###', swVideos);
-        videos = swVideos;
-    }
-    else {
-        videos = mpxVideos;
+    if(typeof source==='undefined') {
+        return playlists.mpxNBCNews;
     }
 
-    return videos;
+    return playlists[source];
 }
 
