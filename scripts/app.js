@@ -93,7 +93,7 @@ var Player = React.createClass({
         return (
             <div className="player">
                 <h2>{video.title}</h2>
-                <iframe src={video.embedUrl} width="420" height="380" frameborder="0" />
+                <iframe src={video.embedUrl} width="600" height="480" frameborder="0" />
                 <h4>{video.topic}</h4>
                 <p>{video.summary}</p>
             </div>
@@ -111,7 +111,7 @@ var routes = (
 var locationTypes = [Router.HashLocation, Router.HistoryLocation, Router.RefreshLocation];
 
 Router.run(routes, locationTypes[0], function (Handler) {
-    React.render(<Handler/>, document.getElementById('pdkplayer'));
+    React.render(<Handler/>, document.getElementById('player-demo'));
 });
 
 // render w/o router

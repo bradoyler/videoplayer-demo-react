@@ -4,12 +4,17 @@
     padding-right: 9px;
 }
 
+#player-demo {
+    background: black;
+    border-top: ridge 2px #ccc;
+    padding-top: 20px;
+}
+
 .playerApp {
     position: relative;
     margin:auto;
     width:1100px;
     height: 100%;
-    background: black;
     color: whitesmoke;
 }
 .playlist-container {
@@ -50,12 +55,12 @@
 
 .player {
     position: fixed;
-    top:60px;
+    top:65px;
     left:0;
     right:0;
-    width: 550px;
+    width: 850px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 80px;
+    padding-left: 250px;
     overflow: auto;
 }
