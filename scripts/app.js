@@ -7,7 +7,7 @@ var Link = Router.Link;
 
 var App = React.createClass({
 
-    getDefaultProps() {
+    getDefaultProps: function () {
         return {
             mpxNBCNews: getVideos('mpxNBCNews'),
             mpxTODAY: getVideos('mpxTODAY'),
