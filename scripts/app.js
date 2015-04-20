@@ -93,7 +93,9 @@ var Player = React.createClass({
         return (
             <div className="player">
                 <h2>{video.title}</h2>
-                <iframe src={video.embedUrl} width="420" height="300" />
+                <iframe src={video.embedUrl} width="420" height="380" frameborder="0" />
+                <h4>{video.topic}</h4>
+                <p>{video.summary}</p>
             </div>
         );
     }
@@ -142,6 +144,8 @@ function getVideos(source) {
         return {
             videoId:item.video.mpxId,
             title:item.video.title,
+            summary:item.video.description,
+            topic: item.topics[0].title,
             thumbnail:item.video.thumbnail,
             embedUrl: item.video.embedUrl,
             source:'mpxNBCNews'
@@ -152,6 +156,8 @@ function getVideos(source) {
         return {
             videoId:item.video.mpxId,
             title:item.video.title,
+            summary:item.summary,
+            topic: item.topics[0].title,
             thumbnail:item.video.thumbnail,
             embedUrl: 'http://www.today.com/offsite/e-'+ item.video.mpxId,
             source:'mpxTODAY'
@@ -162,6 +168,8 @@ function getVideos(source) {
         return {
             videoId:item.videoId,
             title:item.title,
+            summary:item.description,
+            topic: item.channelTitle,
             thumbnail:item.thumbnails.default.url,
             embedUrl: 'https://www.youtube.com/embed/'+item.videoId+'?autoplay=1',
             source:'youtube'
@@ -172,6 +180,8 @@ function getVideos(source) {
         return {
             videoId:item.token,
             title:item.title,
+            summary:item.description,
+            topic:'',
             thumbnail:item.thumbnail,
             embedUrl: 'http://stringwire.com/video/'+item.token+'/embed',
             source:'stringwire'
