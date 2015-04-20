@@ -1,5 +1,5 @@
-# PDKplayer-react
-(offsite) PDK player w/ Playlist example (using [React](https://facebook.github.io/react/))
+# Video Player demo (React)
+Demo video player w/ multiple Playlists (using [React](https://facebook.github.io/react/))
 
 ## Setup
 - clone this repo `$ git clone https://github.com/bradoyler/pdkplayer-react.git pdk-react cd $_;`
@@ -9,4 +9,4 @@
   $ python -m SimpleHTTPServer
   ```
 
-    ![screen shot 2015-04-17 at 11 01 04 am](https://cloud.githubusercontent.com/assets/425966/7204543/23b37498-e4f1-11e4-8220-49cf384f8364.png)
+    ![screen shot 2015-04-20 at 7 26 32 am](https://cloud.githubusercontent.com/assets/425966/7229172/aa1a936a-e72e-11e4-84ba-ba23de5b431f.png)
