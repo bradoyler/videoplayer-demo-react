@@ -2,7 +2,7 @@
 Demo video player w/ multiple Playlists (using [React](https://facebook.github.io/react/))
 
 ## Setup
-- clone this repo `$ git clone https://github.com/bradoyler/pdkplayer-react.git pdk-react cd $_;`
+- clone this repo `$ git clone https://github.com/bradoyler/videoplayer-demo-react.git videoplayer-demo cd $_;`
 - start any http server
 
   ```sh
