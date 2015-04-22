@@ -11,7 +11,6 @@
 }
 
 .playerApp {
-    position: relative;
     margin:auto;
     width:1100px;
     height: 100%;
@@ -24,9 +23,6 @@
     max-height:540px;
     max-width: 320px;
     overflow: auto;
-    left: 0;
-    top: 0;
-    zoom: 1;
     list-style: none;
     margin-left: 0;
     padding-top: 5px;
@@ -34,6 +30,8 @@
 }
 
 .playlist > li {
+    display: block;
+    cursor: pointer;
     height:70px;
     margin-bottom: .375em;
 }
@@ -49,6 +47,10 @@
     color: #fff;
 }
 
+.playlist a:hover {
+    color: #E4CB00;
+}
+
 .playlist a.active {
     color: #E4CB00;
 }
@@ -56,11 +58,7 @@
 .player {
     position: fixed;
     top:65px;
-    left:0;
+    left:44%;
     right:0;
-    width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 250px;
-    overflow: auto;
+    width: 650px;
 }
